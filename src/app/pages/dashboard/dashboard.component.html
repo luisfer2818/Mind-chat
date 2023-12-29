@@ -5,7 +5,7 @@
     <mat-grid-list cols="3" rowHeight="2:1">
       <mat-grid-tile>
         <router-outlet></router-outlet>
-        <div class="grafico" class="col-lg-2">
+        <div class="grafico">
           <canvas id="myChart">
             <!-- {{ chart }} -->
             <!-- class="chart chart-pie"
@@ -17,32 +17,73 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
+
+  <div class="content mat-elevation-z4">
+    <mat-grid-list cols="3" rowHeight="3:1">
+      <mat-grid-tile>
+        <h3 class="titulo">Funcionarios</h3>
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Vinicius Andrade </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-card>
+              <mat-card-content>Simple card</mat-card-content>
+            </mat-card>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Mariana de Souza </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+              <mat-label>Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                (focus)="picker.open()"
+                readonly
+              />
+            </mat-form-field>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h3 class="titulo">Status</h3>
+        <mat-card>
+          <div matBadge="4" matBadgeOverlap="false" class="demo-section">
+            Online
+          </div>
+          <br />
+          <div
+            matBadge="6"
+            matBadgeOverlap="false"
+            class="demo-section"
+            matBadgeColor="warn"
+          >
+            Offline
+          </div>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 </div>
 
 <div class="content mat-elevation-z4">
-  <!-- <app-toolbar-title title="Dashboard" icon="fa-chart-line">
-  </app-toolbar-title> -->
+  <h2>Departamentos</h2>
   <div class="container">
-    <mat-grid-list cols="4" rowHeight="2:1">
+    <mat-grid-list cols="3" rowHeight="2:1">
       <mat-grid-tile>
-        <router-outlet></router-outlet>
-        <h1>teste</h1>
-        <mat-grid-tile>
+        <mat-card>
           <mat-accordion class="example-headers-align" multi>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title> Vinicius Andrade </mat-panel-title>
               </mat-expansion-panel-header>
 
-              <!-- <mat-form-field>
-          <mat-label>First name</mat-label>
-          <input matInput />
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Age</mat-label>
-          <input matInput type="number" min="1" />
-        </mat-form-field> -->
               <mat-card>
                 <mat-card-content>Simple card</mat-card-content>
               </mat-card>
@@ -65,7 +106,7 @@
               <mat-datepicker #picker></mat-datepicker>
             </mat-expansion-panel>
           </mat-accordion>
-        </mat-grid-tile>
+        </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
