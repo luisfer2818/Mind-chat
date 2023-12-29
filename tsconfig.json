@@ -17,15 +17,10 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2020",
-    "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
     "paths": {
-      "@app/*": [
-        "src/app/*"
-      ]
+      "@app/*": ["src/app/*"]
     }
   },
   "angularCompilerOptions": {

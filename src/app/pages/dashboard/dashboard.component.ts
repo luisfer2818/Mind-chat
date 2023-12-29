@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
+// const { Chart } = await import('chart.js');
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,14 +28,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // let ct = document.getElementById('MyChart');
-    // let myCharts = new Chart(ct, {
-    //   type: 'pie',
-    //   data: {
-    //     labels: ['Em aberto', 'Em andamento', 'Concluidas'],
-    //     datasets: [],
-    //   },
-    // });
+    // let ctx = document.getElementById('MyChart');
+    const chart = new Chart('myChart', {
+      type: 'pie',
+      data: {
+        labels: ['Em aberto', 'Em andamento', 'Concluidas'],
+        datasets: [],
+      },
+    });
     //   let chart = new Chart('MyChart', {
     //     type: 'pie', //this denotes tha type of chart
     //     data: {

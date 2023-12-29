@@ -3,27 +3,32 @@ import { MenuItem } from './menuItem';
 export const menuItems: MenuItem[] = [
   {
     link: '/dashboard',
-    icon: 'fa-home',
-    label: 'Home',
+    icon: 'fa-chart-line',
+    label: 'Dashboard',
   },
   {
     link: '/courses',
-    icon: 'fa-graduation-cap',
-    label: 'Chamados',
+    icon: 'fa-book',
+    label: 'Tickets',
   },
   {
     link: '/teachers',
-    icon: 'fa-person-chalkboard',
-    label: 'Professores',
+    icon: 'fa-users',
+    label: 'Funcionários',
   },
-  {
-    link: '/students',
-    icon: 'fa-chalkboard-user',
-    label: 'Alunos',
-  },
+  // {
+  //   link: '/students',
+  //   icon: 'fa-chalkboard-user',
+  //   label: 'Alunos',
+  // },
   {
     link: '/support',
     icon: 'fa-headset',
     label: 'Suporte',
+  },
+  {
+    link: '/users/myProfile',
+    icon: 'fa-cog',
+    label: 'Configurações',
   },
 ];

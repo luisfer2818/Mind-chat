@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -27,6 +28,7 @@ import { DashboardComponent } from './dashboard.component';
     MatButtonModule,
     MatNativeDateModule,
     MatGridListModule,
+    MatCardModule,
   ],
 })
 export class DashboardModule {}

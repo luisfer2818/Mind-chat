@@ -5,7 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CoursesService } from '@app/services/courses.service';
 import { Category, Course } from '@app/shared/models/course';
-import { EMPTY, Observable, catchError, debounceTime, pipe, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, debounceTime, tap } from 'rxjs';
 
 @Component({
   selector: 'app-course-list',
@@ -16,10 +16,12 @@ export class CourseListComponent implements OnInit {
   public courseList: Course[] = [];
   private courseService = inject(CoursesService);
   private fb = inject(FormBuilder);
-  private snackbar = inject(MatSnackBar)
+  private snackbar = inject(MatSnackBar);
   public categoryValue = Object.values(Category);
   public form!: FormGroup;
   public courseData!: Observable<any>;
+
+  colunasTicket: any = ['id', 'titulo', 'departamento', 'data', 'status'];
 
   totalCount: number = 0;
   currentPage: number = 1;
@@ -38,9 +40,7 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.validation();
-    this.form.valueChanges.pipe(
-      debounceTime(1000)
-    ).subscribe((value) => {
+    this.form.valueChanges.pipe(debounceTime(1000)).subscribe((value) => {
       if (value) {
         this.getCourses(
           this.currentPage,
@@ -72,21 +72,21 @@ export class CourseListComponent implements OnInit {
       .get(currentPage, pageSize, category, search)
       .pipe(
         tap((response: HttpResponse<any>) => {
-            this.courseList = response.body as Course[];
-            let totalCount = response.headers.get('X-Total-Count');
-            this.totalCount = totalCount ? Number(totalCount) : 0;
-          }),
+          this.courseList = response.body as Course[];
+          let totalCount = response.headers.get('X-Total-Count');
+          this.totalCount = totalCount ? Number(totalCount) : 0;
+        }),
         catchError((err: string) => {
           this.snackbar.open(err, 'Close', {
-            duration: 5000
+            duration: 5000,
           });
           return EMPTY;
         })
-      )
+      );
   }
 
   public handlePageEvent(e: PageEvent): void {
-    this.currentPage = (e.pageIndex + 1);
+    this.currentPage = e.pageIndex + 1;
     this.pageSize = e.pageSize;
     this.getCourses(
       this.currentPage,

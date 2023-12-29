@@ -48,7 +48,7 @@
     fxFlex.lg="25"
     *ngFor="let course of courseList"
   >
-    <mat-card class="mat-elevation-z4">
+    <!-- <mat-card class="mat-elevation-z4">
       <img
         mat-card-image
         src="./../assets/images/shiba2.jpeg"
@@ -69,11 +69,41 @@
       <mat-card-actions>
         <button mat-button>INSCREVER</button>
         <div fxFlex></div>
-        <!-- <button mat-icon-button>
+        <button mat-icon-button>
           <mat-icon>share</mat-icon>
-        </button> -->
+        </button>
       </mat-card-actions>
-    </mat-card>
+    </mat-card> -->
+
+    <mat-table>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ course.name }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="titulo">
+        <mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.age }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="departamento">
+        <mat-header-cell *matHeaderCellDef> Departamento </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.title }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.title }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.title }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="colunasTicket"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: colunasTicket"></mat-row>
+    </mat-table>
   </div>
   <div fxFlex="100" *ngIf="!courseList.length">
     <br />
