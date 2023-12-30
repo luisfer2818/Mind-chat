@@ -16,11 +16,6 @@ export const menuItems: MenuItem[] = [
     icon: 'fa-users',
     label: 'Funcionários',
   },
-  // {
-  //   link: '/students',
-  //   icon: 'fa-chalkboard-user',
-  //   label: 'Alunos',
-  // },
   {
     link: '/support',
     icon: 'fa-headset',

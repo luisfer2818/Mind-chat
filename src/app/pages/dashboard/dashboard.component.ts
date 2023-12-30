@@ -6,7 +6,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import Chart from 'chart.js/auto';
 
-export interface PeriodicElement {
+export interface ColunasTabela {
   id: number;
   titulo: string;
   departamento: string;
@@ -14,7 +14,7 @@ export interface PeriodicElement {
   status: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+const ELEMENT_DATA: ColunasTabela[] = [
   {
     id: 1,
     titulo: 'Site lento para acessar',
