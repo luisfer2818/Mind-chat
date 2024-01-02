@@ -1,0 +1,58 @@
+<div class="container">
+  <app-toolbar-title title="Novo Ticket" icon="fa-book"></app-toolbar-title>
+  <div mat-dialog>
+    <!-- <p>Novo Ticket</p> -->
+    <mat-form-field>
+      <mat-label>Título</mat-label>
+      <input
+        matInput
+        placeholder="Digite um Titulo..."
+        [formControl]="titulo"
+        required
+      />
+      <mat-error *Ng-if="titulo.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog>
+    <mat-form-field>
+      <mat-label>Departamento</mat-label>
+      <mat-select [formControl]="departamento">
+        <mat-option value="primary">Vendas</mat-option>
+        <mat-option value="accent">Financeiro</mat-option>
+        <mat-option value="warn">Tecnologia</mat-option>
+        <mat-option value="warn">Suporte</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog>
+    <mat-form-field>
+      <mat-label>Data</mat-label>
+      <input matInput [matDatepicker]="data" />
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="data"></mat-datepicker-toggle>
+      <mat-datepicker #data></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div mat-dialog>
+    <mat-form-field hintLabel="Máximo 300 caracteres">
+      <mat-label>Descrição</mat-label>
+      <input
+        matInput
+        #input
+        maxlength="300"
+        [formControl]="descricao"
+        placeholder="descrição..."
+      />
+      <mat-hint align="end">{{ input.value.length }}/300</mat-hint>
+      <mat-error *Ng-if="descricao.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-stroked-button color="warn" mat-dialog-close>
+      Cancelar
+    </button>
+    <button mat-button mat-stroked-button color="primary" cdkFocusInitial>
+      Cadastrar
+    </button>
+  </div>
+</div>

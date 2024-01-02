@@ -1,7 +1,11 @@
 <div class="content mat-elevation-z4">
-  <app-toolbar-title title="Tickets" icon="fa-book"> </app-toolbar-title>
+  <app-toolbar-title title="Tickets" icon="fa-book">
+    <button mat-button mat-raised-button color="primary" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+      Novo Ticket
+    </button>
+  </app-toolbar-title>
   <div class="container">
     <router-outlet></router-outlet>
-    <!-- <button mat-button (click)="openDialog()">Launch dialog</button> -->
   </div>
 </div>

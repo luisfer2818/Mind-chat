@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalAddTicketComponent } from './modal-add-ticket/modal-add-ticket.component';
 
 @Component({
   selector: 'app-courses',
@@ -6,11 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses.component.scss'],
 })
 export class CoursesComponent implements OnInit {
-  constructor() {}
-
-  openDialog() {
-    // this.dialog.open(CoursesComponent);
-  }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalAddTicketComponent, {
+      height: '600px',
+      width: '700px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
