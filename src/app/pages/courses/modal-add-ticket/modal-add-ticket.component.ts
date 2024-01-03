@@ -9,6 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class ModalAddTicketComponent implements OnInit {
   titulo = new FormControl('', [Validators.required]);
   departamento = new FormControl('', [Validators.required]);
+  status = new FormControl('', [Validators.required]);
   descricao = new FormControl('', [Validators.required]);
 
   constructor() {}
@@ -17,7 +18,7 @@ export class ModalAddTicketComponent implements OnInit {
 
   getErrorMessage() {
     if (this.titulo.hasError('required')) {
-      return 'You must enter a value';
+      return 'Digite um valor válido.';
     }
 
     return this.titulo.hasError('titulo') ? 'Digite um titulo' : '';

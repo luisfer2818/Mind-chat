@@ -14,8 +14,8 @@ export class CoursesComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalAddTicketComponent, {
-      height: '600px',
-      width: '700px',
+      height: '500px',
+      width: '600px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
