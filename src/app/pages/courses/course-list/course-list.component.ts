@@ -1,14 +1,17 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ModalAddTicketComponent } from '../modal-add-ticket/modal-add-ticket.component';
 export interface ColunasTabela {
   id: number;
   titulo: string;
   departamento: string;
   data: string;
   status: string;
+  acoes: any;
 }
 
 const ELEMENT_DATA: ColunasTabela[] = [
@@ -18,6 +21,7 @@ const ELEMENT_DATA: ColunasTabela[] = [
     departamento: 'Vendas',
     data: '22/12/2023',
     status: 'aberto',
+    acoes: '',
   },
   {
     id: 2,
@@ -25,6 +29,7 @@ const ELEMENT_DATA: ColunasTabela[] = [
     departamento: 'Tecnologia',
     data: '24/12/2023',
     status: 'em andamento',
+    acoes: '',
   },
   {
     id: 3,
@@ -32,6 +37,7 @@ const ELEMENT_DATA: ColunasTabela[] = [
     departamento: 'Tecnologia',
     data: '26/12/2023',
     status: 'concluido',
+    acoes: '',
   },
   {
     id: 4,
@@ -39,6 +45,7 @@ const ELEMENT_DATA: ColunasTabela[] = [
     departamento: 'Financeiro',
     data: '29/12/2023',
     status: 'concluido',
+    acoes: '',
   },
   {
     id: 5,
@@ -46,6 +53,7 @@ const ELEMENT_DATA: ColunasTabela[] = [
     departamento: 'Tecnologia',
     data: '30/12/2023',
     status: 'em andamento',
+    acoes: '',
   },
   {
     id: 6,
@@ -53,13 +61,15 @@ const ELEMENT_DATA: ColunasTabela[] = [
     departamento: 'Financeiro',
     data: '28/12/2022',
     status: 'aberto',
+    acoes: '',
   },
   {
     id: 7,
-    titulo: 'Pc com lentidão',
+    titulo: 'Pc não liga',
     departamento: 'Financeiro',
     data: '28/12/2022',
     status: 'aberto',
+    acoes: '',
   },
   {
     id: 8,
@@ -67,6 +77,7 @@ const ELEMENT_DATA: ColunasTabela[] = [
     departamento: 'Financeiro',
     data: '28/12/2022',
     status: 'aberto',
+    acoes: '',
   },
 ];
 
@@ -79,7 +90,10 @@ export class CourseListComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(
+    private _liveAnnouncer: LiveAnnouncer,
+    public dialog: MatDialog
+  ) {}
 
   displayedColumns: string[] = [
     'id',
@@ -87,6 +101,7 @@ export class CourseListComponent implements OnInit {
     'departamento',
     'data',
     'status',
+    'acoes',
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -103,5 +118,16 @@ export class CourseListComponent implements OnInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalAddTicketComponent, {
+      height: '500px',
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

@@ -9,7 +9,7 @@
         [formControl]="titulo"
         required
       />
-      <mat-error *Ng-if="titulo.invalid">{{ getErrorMessage() }}</mat-error>
+      <mat-error *ngIf="titulo.invalid">{{ getErrorMessage() }}</mat-error>
     </mat-form-field>
   </div>
   <div mat-dialog>
@@ -56,7 +56,7 @@
         placeholder="Descrição..."
       ></textarea>
       <mat-hint align="end">{{ input.value.length }}/300</mat-hint>
-      <mat-error *Ng-if="descricao.invalid">{{ getErrorMessage() }}</mat-error>
+      <mat-error *ngIf="descricao.invalid">{{ getErrorMessage() }}</mat-error>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
