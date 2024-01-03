@@ -1,12 +1,11 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatAccordion } from '@angular/material/expansion';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import Chart from 'chart.js/auto';
 
-export interface ColunasTabela {
+export interface tabelaTickets {
   id: number;
   titulo: string;
   departamento: string;
@@ -14,7 +13,35 @@ export interface ColunasTabela {
   status: string;
 }
 
-const ELEMENT_DATA: ColunasTabela[] = [
+export interface tabelaFuncionarios {
+  nome: string;
+  cargo: string;
+}
+
+const DATA_FUNCIONARIOS: tabelaFuncionarios[] = [
+  {
+    nome: 'Alcides de Oliveira',
+    cargo: 'Técnico de suporte I',
+  },
+  {
+    nome: 'Maria do Carmo',
+    cargo: 'Técnico de suporte III',
+  },
+  {
+    nome: 'José das Chagas',
+    cargo: 'Desenvolvedor sênior',
+  },
+  {
+    nome: 'Ana Lidia de Soares',
+    cargo: 'Desenvolvedor pleno',
+  },
+  {
+    nome: 'Antônio José da Silva',
+    cargo: 'Gerente de software',
+  },
+];
+
+const DATA_TICKETS: tabelaTickets[] = [
   {
     id: 1,
     titulo: 'Site lento para acessar',
@@ -65,21 +92,22 @@ const ELEMENT_DATA: ColunasTabela[] = [
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  @ViewChild(MatAccordion) accordion!: MatAccordion;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {
-    let panelOpenState = false;
-  }
-  displayedColumns: string[] = [
+  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+
+  colunasTabelaFuncionarios: string[] = ['nome', 'cargo'];
+  colunasTabelaTicket: string[] = [
     'id',
     'titulo',
     'departamento',
     'data',
     'status',
   ];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  dadosTickets = new MatTableDataSource(DATA_TICKETS);
+  dadosFuncionarios = DATA_FUNCIONARIOS;
 
   ngOnInit() {
     new Chart(document.getElementById('pie-chart') as HTMLCanvasElement, {
@@ -103,8 +131,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.dadosTickets.sort = this.sort;
+    this.dadosTickets.paginator = this.paginator;
   }
 
   announceSortChange(sortState: Sort) {
