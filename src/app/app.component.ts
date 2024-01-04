@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { filter, fromEvent, map } from 'rxjs';
-import { MenuItem } from './shared/models/menuItem';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subject, filter, fromEvent, map, take, takeUntil } from 'rxjs';
+import { AuthService } from './pages/auth.service';
 import { menuItems } from './shared/models/menu';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { MenuItem } from './shared/models/menuItem';
 
 export const SCROLL_CONTAINER = 'mat-sidenav-content';
 export const TEXT_LIMIT = 50;
@@ -12,9 +13,9 @@ export const SHADOW_LIMIT = 100;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   public isSmallScreen = false;
   public popText = false;
   public applyShadow = false;
@@ -24,18 +25,38 @@ export class AppComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   public menuName = '';
 
+  public isAuthenticated = false;
+  private _destroySub$ = new Subject<void>();
+
+  constructor(private _authService: AuthService) {}
+
   ngOnInit(): void {
     const content = document.getElementsByClassName(SCROLL_CONTAINER)[0];
 
+    this._authService.isAuthenticated$
+      .pipe(takeUntil(this._destroySub$))
+      .subscribe(
+        (isAuthenticated: boolean) => (this.isAuthenticated = isAuthenticated)
+      );
+
     fromEvent(content, 'scroll')
       .pipe(map(() => content.scrollTop))
-      .subscribe((value: number) => this.determineHeader(value))
+      .subscribe((value: number) => this.determineHeader(value));
 
-    this.route.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.menuName = this.activatedRoute.firstChild?.snapshot.routeConfig?.path ?? '';
-    })
+    this.route.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.menuName =
+          this.activatedRoute.firstChild?.snapshot.routeConfig?.path ?? '';
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this._destroySub$.next();
+  }
+
+  public logout(): void {
+    this._authService.logout('/').pipe(take(1));
   }
 
   determineHeader(scrollTop: number) {
@@ -45,8 +66,8 @@ export class AppComponent implements OnInit {
 
   ngAfterContentInit(): void {
     this.breakpointObserver
-        .observe(['(max-width: 800px)'])
-        .subscribe((res) => this.isSmallScreen = res.matches);
+      .observe(['(max-width: 800px)'])
+      .subscribe((res) => (this.isSmallScreen = res.matches));
   }
 
   get sidenavMode() {

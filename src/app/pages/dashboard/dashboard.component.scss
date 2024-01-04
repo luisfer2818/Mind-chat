@@ -5,9 +5,11 @@
 }
 
 .titulo {
-  position: absolute;
-  height: 230px;
+  align-items: baseline;
+  height: calc(140% - 50%);
+  display: flex;
   font-weight: 500;
+  position: absolute;
 }
 
 .ticket {
