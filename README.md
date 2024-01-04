@@ -1,6 +1,6 @@
 # Sistema de Suporte MindChat
 
-<img src="./src/assets/images/print_sistema_mindChat.png" width="70">
+<img src="./src/assets/images/print_sistema_mindChat.png" alt="imagem" width="900">
 
 ## Mind.chat
 
